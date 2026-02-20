@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  title: API Gestione Libri
+  description: Una semplice API per gestire il catalogo di una biblioteca.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Server di sviluppo locale
+
+paths:
+  /libri:
+    get:
+      summary: Recupera la lista di tutti i libri
+      responses:
+        '200':
+          description: Operazione riuscita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Libro'
+    
+    # --- AGGIUNTA POST (Creazione) ---
+    post:
+      summary: Aggiunge un nuovo libro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Libro'
+      responses:
+        '201':
+          description: Libro creato con successo
+
+  # --- NUOVA ROTTA PER OPERAZIONI SUL SINGOLO LIBRO ---
+  /libri/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID numerico del libro
+        schema:
+          type: integer
+
+    # --- AGGIUNTA PUT (Aggiornamento) ---
+    put:
+      summary: Aggiorna un libro esistente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Libro'
+      responses:
+        '200':
+          description: Libro aggiornato
+        '404':
+          description: Libro non trovato
+
+    # --- AGGIUNTA DELETE (Eliminazione) ---
+    delete:
+      summary: Elimina un libro dal catalogo
+      responses:
+        '204':
+          description: Libro eliminato con successo
+        '404':
+          description: Libro non trovato
+
+components:
+  schemas:
+    Libro:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        titolo:
+          type: string
+          example: "Il Signore degli Anelli"
+        autore:
+          type: string
+          example: "J.R.R. Tolkien"
