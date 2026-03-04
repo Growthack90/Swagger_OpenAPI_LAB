@@ -20,9 +20,20 @@ Nota: in questo caso accedere a `http://127.0.0.1:4010/libri` per ricevere rispo
 
 Per trasformare lo Swagger in una vera applicazione Python, useremo `FastAPI`. È il framework moderno più simile a `Swagger`, tanto che genera la documentazione automaticamente.
 
+
 Apri un altro terminale, ed installa le librerie necessarie:
 ```powerhell
 pip install fastapi uvicorn
+```
+
+Prima però installa l'ambiente virtuale:
+```powerhell
+python -m venv venv
+.\venv\Scripts\activate
+
+# per versioni specifiche di Python (per esempio 3.11)
+py -3.11 -m venv venv
+.\venv\Scripts\activate
 ```
 
 **Avviare e Testare l'App**
