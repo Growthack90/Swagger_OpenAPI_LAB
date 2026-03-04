@@ -15,6 +15,14 @@ npx @stoplight/prism-cli mock api-libreria.yaml
 Il server sarà attivo su `http://127.0.0.1:4010`. Se provi a chiamare quell'URL, Prism leggerà il tuo file YAML e inventerà dei dati coerenti con lo schema.
 Nota: in questo caso accedere a `http://127.0.0.1:4010/libri` per ricevere risposta di successo con `200`.
 
+Importante: in modalità `mock`, Prism **non mantiene uno stato persistente** delle chiamate `POST/PUT/DELETE`.
+Quindi una `POST` fatta su `http://127.0.0.1:4010/libri` non modifica davvero i dati letti dalla `GET` successiva.
+
+Se vuoi passare da Prism ma usare i dati reali della tua app FastAPI, avvia Prism in modalità `proxy` verso `http://127.0.0.1:8000`:
+```powerhell
+npx @stoplight/prism-cli proxy api-libreria.yaml http://127.0.0.1:8000
+```
+
 
 ### 2. L'App Python (Il Server Reale)
 
