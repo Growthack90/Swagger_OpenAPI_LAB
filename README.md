@@ -52,3 +52,17 @@ uvicorn main:app --reload
 Vai su `http://127.0.0.1:8000/docs`.
 
 La cosa incredibile? FastAPI ha letto il tuo codice Python e ha generato una pagina Swagger identica a quella che stavi scrivendo a mano!
+
+### 3. Persistenza dati (SQLite)
+
+Ho creato un nuovo file che ha come base il `main.py` ma modificato chiamato `main_persistent.py`. Copia pure il contenuto di quest'ultimo ed inseriscilo nel file principale.
+
+L'app FastAPI usa ora un database locale SQLite (`biblioteca.db`) nella cartella del progetto.
+
+- Le operazioni `POST/PUT/DELETE` su `http://127.0.0.1:8000/libri` sono persistenti.
+- Dopo un riavvio di `uvicorn`, i dati restano disponibili.
+
+Per test rapido:
+1. Fai una `POST` da `http://127.0.0.1:8000/docs`.
+2. Esegui una `GET /libri` e verifica il nuovo record.
+3. Riavvia il server e ripeti `GET /libri`: il record è ancora presente.
